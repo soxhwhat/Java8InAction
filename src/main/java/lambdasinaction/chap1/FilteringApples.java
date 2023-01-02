@@ -12,6 +12,8 @@ public class FilteringApples{
                                               new Apple(120, "red"));	
 
         // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
+        // 参数化行为，Predicate<Apple>是一个函数式接口，只有一个抽象方法test
+        // 此处传入的方法引用，是一个谓词，判断苹果是否为绿色
         List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
         System.out.println(greenApples);
         
@@ -20,6 +22,7 @@ public class FilteringApples{
         System.out.println(heavyApples);
         
         // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
+        // 参数化行为，直接传入方法体
         List<Apple> greenApples2 = filterApples(inventory, (Apple a) -> "green".equals(a.getColor()));
         System.out.println(greenApples2);
         
@@ -61,6 +64,10 @@ public class FilteringApples{
         return apple.getWeight() > 150;
     }
 
+    /**
+     * 将行为抽象化，将行为作为参数传递
+     * 使用Predicate接口
+     */
     public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p){
         List<Apple> result = new ArrayList<>();
         for(Apple apple : inventory){
@@ -103,5 +110,7 @@ public class FilteringApples{
                    '}';
         }
     }
+
+
 
 }
